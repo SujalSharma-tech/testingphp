@@ -3,9 +3,10 @@
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-require_once('./vendor/autoload.php');
+require_once('./firebase/vendor/autoload.php');
 header('Content-Type: application/json');
 $secretKey = 'your-secret-key';
+
 
 function generateToken($email, $password)
 {
@@ -42,20 +43,26 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         'message' => 'Data received successfully!'
     ]);
 } else if ($_SERVER['REQUEST_METHOD'] === "GET") {
-    $token = $_COOKIE['token'];
-    global $secretKey;
-    try {
-        $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
+        global $secretKey;
+        try {
+            $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
 
-        $email = $decoded->data->email;
-        $password = $decoded->data->password;
+            $email = $decoded->data->email;
+            $password = $decoded->data->password;
 
+            echo json_encode([
+                'email' => $email,
+                'password' => $password
+            ]);
+        } catch (Exception $e) {
+            echo 'Token is invalid or expired: ', $e->getMessage();
+        }
+    } else {
         echo json_encode([
-            'email' => $email,
-            'password' => $password
+            'message' => 'Token not found!'
         ]);
-    } catch (Exception $e) {
-        echo 'Token is invalid or expired: ', $e->getMessage();
     }
 } else {
     echo json_encode([
