@@ -38,6 +38,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $token = generateToken($email, $password);
     setcookie("token", $token, $expirationTime, "/", "localhost", true, true);
 
+    $db_name = "mysql:hostname=localhost;dbname=testing";
+    $username = "root";
+    $password = "";
+
+    $conn = new PDO($db_name, $username, $password);
+
+    $sql1 = $conn->query("SELECT * FROM Students");
+    $sql2 = $conn->query("SELECT * FROM Students");
+
+    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+        echo "<pre>";
+        print_r($row);
+        echo "</pre>";
+    }
+
+
     echo json_encode([
         'token' => $token,
         'message' => 'Data received successfully!'
