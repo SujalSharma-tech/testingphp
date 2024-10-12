@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="myform">
+      <input type="text" name="email" id="" />
+      <input type="password" name="password" id="" />
+      <button type="submit">Submit</button>
+    </form>
+
+    <button id="show-data" style="display: none">View Data</button>
+    <h1 id="email"></h1>
+    <h1 id="password"></h1>
+
+    <script>
+      const myform = document.getElementById("myform");
+      const button = document.getElementById("show-data");
+
+      const showData = () => {
+        button.style.display = "block";
+      };
+
+      button.addEventListener("click", () => {
+        fetch("index.php", { method: "GET" })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            document.getElementById("email").innerText = data.email;
+            document.getElementById("password").innerText = data.password;
+          })
+          .catch((e) => {
+            console.error(e);
+          });
+      });
+
+      myform.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(myform);
+
+        const formData = new FormData(myform);
+
+        fetch("index.php", {
+          method: "POST",
+          body: JSON.stringify({
+            email: myform.email.value,
+            password: myform.password.value,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => showData())
+          .catch((e) => {
+            console.error(e);
+          });
+      });
+    </script>
+  </body>
+</html>
