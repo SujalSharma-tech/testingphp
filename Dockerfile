@@ -7,4 +7,5 @@ RUN composer require firebase/php-jwt
 COPY ./src /var/www/html
 # COPY index.php index.php
 # COPY index.html index.html
+RUN docker-compose up -d
 EXPOSE 80
