@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $token = generateToken($email, $password);
     setcookie("token", $token, $expirationTime, "/", "localhost", true, true);
 
-    $db_name = "mysql:hostname=mysql_db;dbname=testing";
+    $db_name = "mysql:hostname=mysql_db;dbname=example";
     $username = "root";
     $password = "";
 
