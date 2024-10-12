@@ -39,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     setcookie("token", $token, $expirationTime, "/", "localhost", true, true);
 
     $db_name = "mysql:hostname=mysql_db;dbname=example";
-    $username = "root";
-    $password = "";
+    $username = "example";
+    $password = "example";
 
     $conn = new PDO($db_name, $username, $password);
 
