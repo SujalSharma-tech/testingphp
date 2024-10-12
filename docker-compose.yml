@@ -1,0 +1,33 @@
+
+services:
+
+  php-env:
+    image: php:8.0-apache
+    restart: always
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - mysql_db
+
+
+  mysql_db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: example
+  
+  
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - 9001:80
+    environment:
+      - PMA_ARBITRARY=1
+    
