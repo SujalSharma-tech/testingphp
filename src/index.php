@@ -3,7 +3,7 @@
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-require_once('./firebase/vendor/autoload.php');
+require_once('./vendor/autoload.php');
 header('Content-Type: application/json');
 $secretKey = 'your-secret-key';
 
