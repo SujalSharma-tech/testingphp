@@ -57,8 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     // $sql0 = $mysqli->query("INSERT INTO Students (Id, Name, Age, City) VALUES (2,'Aman',20,'Phg')");
     $first_name = "Sujal";
     $last_name = "Sharma";
-    $email = "sharmasujal995@example.com";
-    $password = "hashed_password";
+    // $email = "sharmasujal995@example.com";
+    // $password = "hashed_password";
     $phone_number = "8474726477";
     $is_verified = 1;
     $is_landlord = 0;
